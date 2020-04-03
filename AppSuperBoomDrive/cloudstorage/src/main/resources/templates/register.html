@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+    <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/bootstrap.min.css}">
+
+        <title>Sign Up</title>
+    </head>
+    <body class="p-3 mb-2 bg-light text-black">
+        <div class="container justify-content-center w-50 p-3" style="background-color: #eeeeee; margin-top: 5em;">
+            <div class="form-group">
+                <span>Already registered? <a href="/" th:href="@{/login}">Back to Login</a></span>
+            </div>
+         	<div th:if="${param.success}">
+				<div class="alert alert-dark">
+	                    You successfully signed up! Please continue to the <a href="/" th:href="@{/login}">login</a> page.
+	            </div>
+            </div>
+            <h1 class="display-5">Sign Up</h1>
+            <form th:action="@{/register}" th:object="${user}" method="POST">
+	            <div class="alert alert-danger" th:if="${#fields.hasGlobalErrors()}">
+	            	<p class="error-message" th:if="${#fields.hasGlobalErrors()}"
+	      				th:each="error : ${#fields.errors('global')}" th:text="${error}">Validation error
+	      			</p>
+	      		</div>	
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="firstName">First Name</label>
+                        <input type="input" name="firstName" class="form-control" id="firstName" 
+                        	placeholder="Enter First Name" maxlength="20" th:field="*{firstName}" required />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="lastName">Last Name</label>
+                        <input type="input" name="lastName" class="form-control" id="lastName" 
+                        	placeholder="Enter Last Name" maxlength="20" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="username">Username</label>
+                        <input type="input" name="username" class="form-control" id="username" 
+                        	placeholder="Enter Username" maxlength="50" required>
+                        	<p class="error-message"
+							th:each="error : ${#fields.errors('username')}" th:text="${error}">Validation
+							error</p>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="confirmUsername">ConfirmUsername</label>
+                        <input type="input" name="confirmUsername" class="form-control" id="confirmUsername" 
+                        	placeholder="Enter Confirm Username" maxlength="50" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" class="form-control" id="password" 
+                        	placeholder="Enter Password" maxlength="20" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" name="confirmPassword" class="form-control" id="confirmPassword" 
+                        	placeholder="Enter Confirm Password" maxlength="20" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+            </form>
+        </div>
+        <script type="text/javascript" th:src="@{/webjars/jquery/3.2.1/jquery.min.js/}"></script>
+ 		<script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>
+    </body>
+</html>
